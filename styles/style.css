@@ -1,0 +1,50 @@
+/* styles/style.css */
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Header Styling */
+header {
+    padding: 50px 0;
+}
+
+/* Project Cards */
+.card {
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-text {
+    font-size: 13px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    margin-top: 50px;
+}
+
+
+/* Styling for truncated text */
+.card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Show only 4 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.expanded {
+    -webkit-line-clamp: unset; /* Show full text when expanded */
+}
+.read-more-btn {
+    background: none;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    padding: 0;
+}

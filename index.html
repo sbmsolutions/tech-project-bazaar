@@ -4,9 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Project Bazaar</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAghIMQu-4uzN_Bh024AmNbBnnm1cSpaco",
+            authDomain: "prepwise-bb055.firebaseapp.com",
+            databaseURL: "https://prepwise-bb055-default-rtdb.firebaseio.com",
+            projectId: "prepwise-bb055",
+            storageBucket: "prepwise-bb055.appspot.com",
+            messagingSenderId: "529962612183",
+            appId: "1:529962612183:web:05197f67975a1b59d2c792",
+            measurementId: "G-08LNDHFMMH"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function fetchProjects() {
+            console.log("Fetching projects...");
+            const projectList = document.getElementById("project-list");
+            projectList.innerHTML = ""; // Clear old data
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "Projects"));
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const projectHTML = `
+                        <div class="col-md-4">
+                            <div class="card">
+                                <img src="${data.ProjectImage}" class="card-img-top" alt="${data.ProjectName}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${data.ProjectName}</h5>
+                                    <p class="card-text">${data.ProjectDescription}</p>
+                                    <a href="${data.detailsPage}" class="btn btn-primary">Details</a>
+                                    <a href="${data.ProjectDemoLink}" class="btn btn-danger">Demo</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    projectList.innerHTML += projectHTML;
+                });
+            } catch (error) {
+                console.error("Error fetching projects: ", error);
+            }
+        }
+
+        window.onload = fetchProjects;
+
+        // Function to toggle "Read More"
+        window.toggleReadMore = function (button) {
+            const description = button.previousElementSibling;
+            description.classList.toggle("expanded");
+            button.textContent = description.classList.contains("expanded") ? "Read Less" : "Read More";
+        };
+    </script>
 </head>
 <body>
-    <h1>Welcome to Tech Project Bazaar</h1>
-    <p>Explore high-quality, ready-made final-year IT & CS projects.</p>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Tech Project Bazaar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://github.com/sbmsolutions/tech-project-bazaar" target="_blank">GitHub Repo</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="text-center py-5 bg-primary text-white">
+        <h1>Welcome to Tech Project Bazaar</h1>
+        <p>Your one-stop solution for final-year IT & CS projects</p>
+    </header>
+
+    <div class="container my-5">
+        <div class="row" id="project-list">
+            <!-- Dynamic Projects Will Be Loaded Here -->
+        </div>
+    </div>
+
+    <section id="about" class="container my-5 text-center">
+        <h2>About Us</h2>
+        <p>Tech Project Bazaar provides high-quality, ready-made final-year IT & CS projects. Our goal is to help students complete their projects with ease.</p>
+    </section>
+
+    <section id="contact" class="container my-5 text-center">
+        <h2>Contact Us</h2>
+        <p>Email: sbmsolutions@example.com | Phone: +1234567890</p>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 Tech Project Bazaar | All rights reserved</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
