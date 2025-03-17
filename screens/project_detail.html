@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <div class="project-container">
+        <h1 id="project-title" class="project-title">Loading...</h1>
+        <img id="project-image" class="project-image" src="" alt="Project Image">
+        <p id="project-description" class="project-details">Fetching details...</p>
+        
+        <div id="project-details" class="project-details-container">
+            <p id="project-Language" class="project-details-item"></p>
+            <p id="project-ProjectType" class="project-details-item"></p>
+            <p id="project-DatabaseCategory" class="project-details-item"></p>
+            <p id="project-DatabaseType" class="project-details-item"></p>
+            <p id="project-SourceCodeAvailable" class="project-details-item"></p>
+            <p id="project-ProjectReportAvailable" class="project-details-item"></p>
+            <p id="project-ProjectActivityDocument" class="project-details-item"></p>
+            <p id="project-ProjectReportDocument" class="project-details-item"></p>
+            <p id="project-ProjectAvailable" class="project-details-item"></p>
+            <p id="project-SynopsisAvailable" class="project-details-item"></p>
+            <p id="project-SynopsisDocument" class="project-details-item"></p>
+            <p id="project-ProjectTags" class="project-details-item"></p>
+        </div>
+        
+        <div class="project-buttons">
+            <a href="#" id="youtube-link" class="btn btn-primary" target="_blank">Watch Demo</a>
+            <a href="/index.html" class="btn btn-secondary">Back to Projects</a>
+        </div>
+    </div>
+
+    <script type="module">
+        // Get project ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get('id');
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAghIMQu-4uzN_Bh024AmNbBnnm1cSpaco",
+            authDomain: "prepwise-bb055.firebaseapp.com",
+            projectId: "prepwise-bb055",
+            storageBucket: "prepwise-bb055.appspot.com",
+            messagingSenderId: "529962612183",
+            appId: "1:529962612183:web:05197f67975a1b59d2c792",
+            measurementId: "G-08LNDHFMMH"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function fetchProjectDetails() {
+            if (!projectId) {
+                console.error("Project ID not found in URL!");
+                return;
+            }
+
+            const docRef = doc(db, "Projects", projectId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                document.getElementById("project-title").textContent = data.ProjectName;
+                document.getElementById("project-description").textContent = data.ProjectDescription;
+                document.getElementById("project-DatabaseCategory").innerHTML = "<strong>Database Category: </strong>"+data.DatabaseCategory;
+                document.getElementById("project-DatabaseType").innerHTML = "<strong>Database Type: </strong>"+data.DatabaseType;
+                document.getElementById("project-Language").innerHTML = "<strong>Language: </strong>"+data.Language;
+                document.getElementById("project-ProjectActivityDocument").innerHTML = "<strong>Project Activity Document Available: </strong>"+data.ProjectActivityDocument;
+                document.getElementById("project-ProjectAvailable").innerHTML = "<strong>Project Available: </strong>"+data.ProjectAvailable;
+                document.getElementById("project-ProjectReportAvailable").innerHTML = "<strong>Project Report Available: </strong>"+data.ProjectReportAvailable;
+                document.getElementById("project-ProjectReportDocument").innerHTML = "<strong>Project Report Document: </strong>"+data.ProjectReportDocument;
+                document.getElementById("project-ProjectTags").innerHTML = "<strong>Project Tags: </strong>"+data.ProjectTags;
+                document.getElementById("project-ProjectType").innerHTML = "<strong>Project Type: </strong>"+data.ProjectType;
+                document.getElementById("project-SourceCodeAvailable").innerHTML = "<strong>Source Code Available: </strong>"+data.SourceCodeAvailable;
+                document.getElementById("project-SynopsisAvailable").innerHTML = "<strong>Synopsis Available: </strong>"+data.SynopsisAvailable;
+                document.getElementById("project-SynopsisDocument").innerHTML = "<strong>Synopsis Document: </strong>"+data.SynopsisDocument;
+                document.getElementById("project-image").src = data.ProjectImage;
+                document.getElementById("youtube-link").href = data.ProjectDemoLink || "#";
+            } else {
+                console.error("No such project found!");
+            }
+        }
+
+        window.onload = fetchProjectDetails;
+    </script>
+</body>
+</html>
