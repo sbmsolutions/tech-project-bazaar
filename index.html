@@ -6,6 +6,8 @@
     <title>Tech Project Bazaar</title>
     <link rel="stylesheet" href="styles/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js"></script>
@@ -80,9 +82,22 @@
                     <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="screens/project_ideas.html">Project Ideas</a></li>
+            
+                    <!-- Project Ideas Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="projectIdeasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Learning Aid
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="projectIdeasDropdown">
+                            <li><a class="dropdown-item" href="screens/books.html">📚 Books</a></li>
+                            <li><a class="dropdown-item" href="screens/code_sheets.html">💻 Code Sheets</a></li>
+                            <li><a class="dropdown-item" href="screens/commands.html">⌨ Commands</a></li>
+                            <li><a class="dropdown-item" href="#">💡 Project Ideas</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
+            
         </div>
     </nav>
 
@@ -98,15 +113,52 @@
     </div>
 
     <section id="about" class="container my-5 text-center">
-        <h2>About Us</h2>
-        <p>Tech Project Bazaar provides high-quality, ready-made final-year IT & CS projects. Our goal is to help students complete their projects with ease.</p>
+        <div class="heading">
+            <h2 class="about_head_underline">About Us</h2>
+            <p style="font-size: 13px;">Welcome to <strong>Tech Project Bazaar</strong>, your one-stop solution for all project development needs! We specialize in building innovative and industry-relevant projects for final-year IT and CS students, ensuring they gain hands-on experience with the latest technologies.</p>
+        </div>
+        
+        <div class="about-container">
+            <div class="about-image">
+                <img src="assets/images/about-image.jpg" alt="About Us">
+            </div>
+            <div class="about-content">
+                <p>We also provide comprehensive blackbook documentation assistance, helping students present their projects professionally with well-structured reports, UML diagrams, and detailed explanations.</p>
+                <p>Beyond academics, we empower local businesses by developing customized websites and mobile applications to enhance their digital presence and streamline their operations.</p>
+                <p>At <strong>Tech Project Bazaar</strong>, our goal is to turn ideas into reality while providing expert guidance and high-quality solutions. 🚀</p>
+                
+                <a href="screens/aboutus.html" class="btn btn-primary">Read More</a>
+            </div>
+        </div>
     </section>
+    
 
-    <section id="contact" class="container my-5 text-center">
-        <h2>Contact Us</h2>
-        <p>Email: sbmsolutions95@gmail.com.com | Phone: +91-9359168479</p>
+    <section id="contact" class="container my-5">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p>Feel free to get in touch with us.</p>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +91-9359168479</li>
+                    <li><i class="fas fa-envelope"></i> sbmsolutions95@gmail.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> India</li>
+                </ul>
+            </div>
+            <div class="contact-form">
+                <h3>Get In Touch</h3>
+                <form>
+                    <div class="input-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <input type="text" name="subject" placeholder="Your Subject" required>
+                    <textarea name="message" placeholder="Write your message" required></textarea>
+                    <button type="submit" class="btn-primary-contact">Send Message</button>
+                </form>
+            </div>
+        </div>
     </section>
-
+    
     <footer class="bg-dark text-white text-center py-3">
         <p>&copy; 2025 Tech Project Bazaar | All rights reserved by <b>SBM Solutions</b></p>
     </footer>

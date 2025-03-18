@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Tech Project Bazaar</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+        }
+        .contact-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #d4fc79, #96e6a1);
+        }
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .contact-info, .contact-form {
+            flex: 1;
+            padding: 20px;
+            min-width: 300px;
+        }
+        .contact-info h2, .contact-form h2 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .contact-info p {
+            font-size: 16px;
+            color: #555;
+            margin: 5px 0;
+        }
+        .contact-info i {
+            color: #007bff;
+            margin-right: 10px;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        textarea {
+            height: 100px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Contact Information</h2>
+                <p>Get in touch with us for any queries or project assistance.</p>
+                <p><i class="fas fa-phone-alt"></i> +91 9359168479</p>
+                <p><i class="fas fa-envelope"></i> support@techprojectbazaar.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> India</p>
+            </div>
+            <div class="contact-form">
+                <h2>Get In Touch</h2>
+                <form>
+                    <div class="input-group">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <input type="text" placeholder="Your Subject" required>
+                    <textarea placeholder="Write your message"></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

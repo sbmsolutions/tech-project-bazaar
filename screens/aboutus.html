@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Tech Project Bazaar</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px;
+        }
+        .about_head_underline {
+            font-size: 36px;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+        }
+        .about_head_underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff0000, #ff7300, #ff00ff);
+            bottom: -10px;
+            left: 0;
+            box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            0% { box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8); }
+            100% { box-shadow: 0px 0px 20px rgba(255, 255, 0, 0.8); }
+        }
+        .about-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px 20px;
+        }
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        .about-image img {
+            width: 80%;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .about-image img:hover {
+            transform: scale(1.05);
+        }
+        .about-content {
+            flex: 1;
+            padding: 20px;
+            text-align: left;
+        }
+        .about-content p {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .social-icons {
+            margin-top: 20px;
+        }
+        .social-icons a {
+            color: #007bff;
+            font-size: 24px;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+        .social-icons a:hover {
+            color: #0056b3;
+        }
+        .team {
+            margin-top: 50px;
+        }
+        .team img {
+            width: 100px;
+            border-radius: 50%;
+            margin: 10px;
+        }
+        @media (max-width: 768px) {
+            .about-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-content {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="about_head_underline">About Us</h2>
+        <div class="about-section">
+            <div class="about-image">
+                <img src="/assets/images/about-image.jpg" alt="About Us">
+            </div>
+            <div class="about-content">
+                <p style="font-size: 13px;">Welcome to <strong>Tech Project Bazaar</strong>, your go-to hub for final-year project development, blackbook documentation, and business digitalization.</p>
+                <p style="font-size: 13px;">We help IT and CS students by providing top-notch project solutions, while also assisting local businesses in building custom websites and mobile applications.</p>
+                <p style="font-size: 13px;">We also provide comprehensive blackbook documentation assistance, helping students present their projects professionally with well-structured reports, UML diagrams, and detailed explanations.</p>
+                <p style="font-size: 13px;">Beyond academics, we empower local businesses by developing customized websites and mobile applications to enhance their digital presence and streamline their operations.</p>
+                <p style="font-size: 13px;">Additionally, we offer one-on-one project explanations, ensuring students and business owners understand every aspect of their project, from implementation to deployment.</p>
+                <p style="font-size: 13px;">At <strong>Tech Project Bazaar</strong>, our goal is to turn ideas into reality while providing expert guidance and high-quality solutions. 🚀</p>
+            </div>
+        </div>
+        <!-- <div class="team">
+            <h3>Our Team</h3>
+            <img src="/assets/images/image-palceholder.jpg" alt="Team Member">
+            <img src="/assets/images/image-palceholder.jpg" alt="Team Member">
+        </div> -->
+        <div class="social-icons">
+            <a href="https://www.instagram.com/sbmsolutions95" target="_blank"><i class="fab fa-instagram"></i></a>
+            <!-- <a href="#"><i class="fab fa-linkedin"></i></a> -->
+            <a href="https://wa.me/919359168479" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="contact-info">
+            <p style="font-size: 13px;">Email: sbmsolutions95@gmail.com</p>
+            <p style="font-size: 13px;">Phone: +91-9359168479</p>
+        </div>
+    </div>
+</body>
+</html>
