@@ -4,10 +4,497 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Project Bazaar</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
 
+    <style>
+        :root {
+            --primary: #3a86ff;
+            --primary-dark: #2667cc;
+            --secondary: #ff5a5f;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --light-gray: #e5e7eb;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Navbar Styling */
+        .navbar {
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0;
+            position: relative;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            margin: 0 10px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(135deg, var(--primary), #4cc9f0);
+            padding: 80px 0;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%23ffffff" fill-opacity="0.1" d="M0,192L48,181.3C96,171,192,149,288,154.7C384,160,480,192,576,197.3C672,203,768,181,864,160C960,139,1056,117,1152,133.3C1248,149,1344,203,1392,229.3L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Project Cards */
+        .card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .card-text {
+            color: var(--gray);
+            margin-bottom: 20px;
+            display: -webkit-box;
+            font-size: 13px;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .btn {
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-danger:hover {
+            background-color: #e01e37;
+            border-color: #e01e37;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        
+        /* Pagination buttons */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+        }
+        
+        .pagination-btn {
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pagination-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        /* About Section */
+        .about_head_underline {
+            position: relative;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            font-weight: 700;
+            display: inline-block;
+        }
+        
+        .about_head_underline::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.02);
+        }
+        
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+        
+        .about-content p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: var(--gray);
+        }
+        
+        /* Contact Section */
+        #contact {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .contact-info, .contact-form {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .contact-info h3, .contact-form h3 {
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .contact-info h3::after, .contact-form h3::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .contact-info ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+        
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            color: var(--gray);
+        }
+        
+        .contact-info li i {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-form input, .contact-form textarea {
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.1);
+        }
+        
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn-primary-contact {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+        
+        .btn-primary-contact:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            padding: 30px 0;
+            position: relative;
+        }
+        
+        footer p {
+            margin: 0;
+        }
+        
+        footer b {
+            color: var(--primary);
+        }
+        
+        /* Animation Effects */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fadeIn {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 991px) {
+            header {
+                padding: 60px 0;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-content {
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            header p {
+                font-size: 1rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .contact-info, .contact-form {
+                padding: 15px;
+            }
+        }
+        
+        /* Loading Animation */
+        .loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+        
+        .loader div {
+            width: 15px;
+            height: 15px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: bounce 0.5s alternate infinite;
+        }
+        
+        .loader div:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+        
+        .loader div:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+        
+        @keyframes bounce {
+            to {
+                transform: translateY(-15px);
+            }
+        }
+    </style>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js"></script>
@@ -15,8 +502,9 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, query, orderBy, limit, startAfter, startAt } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
 
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAghIMQu-4uzN_Bh024AmNbBnnm1cSpaco",
             authDomain: "prepwise-bb055.firebaseapp.com",
@@ -31,43 +519,104 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        async function fetchProjects() {
-            console.log("Fetching projects...");
-            const projectList = document.getElementById("project-list");
-            projectList.innerHTML = ""; // Clear old data
+        const projectList = document.getElementById("project-list");
+        const nextBtn = document.getElementById("next-btn");
+        const prevBtn = document.getElementById("prev-btn");
+        const loader = document.getElementById("loader");
+
+        let lastVisible = null;
+        let firstVisible = null;
+        let pageStack = []; // Stack to track previous pages
+        let pageSize = 3;   // Number of records per page
+
+        async function fetchProjects(next = true) {
+            loader.style.display = "flex";
+            projectList.style.display = "none";
+
+            let q;
+            if (next) {
+                if (lastVisible) {
+                    pageStack.push(firstVisible); // Save the first record of the current page
+                }
+                q = lastVisible 
+                    ? query(collection(db, "Projects"), orderBy("ProjectName"), startAfter(lastVisible), limit(pageSize))
+                    : query(collection(db, "Projects"), orderBy("ProjectName"), limit(pageSize));
+            } else {
+                if (pageStack.length > 0) {
+                    firstVisible = pageStack.pop(); // Load the first document of the previous page
+                    q = query(collection(db, "Projects"), orderBy("ProjectName"), startAt(firstVisible), limit(pageSize));
+                } else {
+                    loader.style.display = "none";
+                    projectList.style.display = "flex";
+                    return; // No previous data available
+                }
+            }
 
             try {
-                const querySnapshot = await getDocs(collection(db, "Projects"));
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const projectHTML = `
-                        <div class="col-md-4">
-                            <div class="card">
-                                <img src="${data.ProjectImage}" class="card-img-top" alt="${data.ProjectName}">
-                                <div class="card-body">
-                                    <h5 class="card-title">${data.ProjectName}</h5>
-                                    <p class="card-text">${data.ProjectDescription}</p>
-                                    <a href="screens/project_detail.html?id=${data.ProjectId}" class="btn btn-primary">Details</a>
-                                    <a href="${data.ProjectDemoLink}" class="btn btn-danger">Demo</a>
+                projectList.innerHTML = ""; // Clear existing projects
+                
+                const querySnapshot = await getDocs(q);
+                if (!querySnapshot.empty) {
+                    firstVisible = querySnapshot.docs[0]; // Store first document for backward navigation
+                    lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1]; // Store last document for next fetch
+
+                    querySnapshot.forEach((doc, index) => {
+                        const data = doc.data();
+                        const delay = index * 0.1;
+                        
+                        const projectHTML = `
+                            <div class="col-md-4 fadeIn" style="animation-delay: ${delay}s">
+                                <div class="card">
+                                    <img src="${data.ProjectImage}" class="card-img-top" alt="${data.ProjectName}">
+                                    <div class="card-body">
+                                        <h6 class="card-title">${data.ProjectName}</h6>
+                                        <p class="card-text">${data.ProjectDescription}</p>
+                                        <div class="d-flex gap-2">
+                                            <a href="tech-project-bazaar/screens/project_detail.html?id=${data.ProjectId}" class="btn btn-primary">
+                                                <i class="fas fa-info-circle me-1"></i> Details
+                                            </a>
+                                            <a href="${data.ProjectDemoLink}" class="btn btn-danger">
+                                                <i class="fas fa-play-circle me-1"></i> Demo
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    `;
-                    projectList.innerHTML += projectHTML;
-                });
+                        `;
+                        projectList.innerHTML += projectHTML;
+                    });
+
+                    // Scroll to top after fetching new projects
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    // Show/Hide Previous & Next buttons
+                    prevBtn.style.display = pageStack.length > 0 ? "inline-block" : "none";
+                    nextBtn.style.display = querySnapshot.size < pageSize ? "none" : "inline-block";
+
+                } else {
+                    console.log("No more projects to display.");
+                    nextBtn.style.display = "none"; // Hide next button if no more projects
+                }
+                
+                // Hide loader and show projects after loading
+                setTimeout(() => {
+                    loader.style.display = "none";
+                    projectList.style.display = "flex";
+                }, 500);
+                
             } catch (error) {
-                console.error("Error fetching projects: ", error);
+                console.error("Error fetching projects:", error);
+                loader.style.display = "none";
+                projectList.style.display = "flex";
             }
         }
 
-        window.onload = fetchProjects;
+        // Load first set of projects
+        window.onload = () => fetchProjects(true);
 
-        // Function to toggle "Read More"
-        window.toggleReadMore = function (button) {
-            const description = button.previousElementSibling;
-            description.classList.toggle("expanded");
-            button.textContent = description.classList.contains("expanded") ? "Read Less" : "Read More";
-        };
+        // Next & Previous buttons
+        nextBtn.addEventListener("click", () => fetchProjects(true));
+        prevBtn.addEventListener("click", () => fetchProjects(false));
     </script>
 </head>
 <body>
@@ -79,43 +628,48 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-            
-                    <!-- Project Ideas Dropdown -->
-                    <!-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="projectIdeasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Learning Aid
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="projectIdeasDropdown">
-                            <li><a class="dropdown-item" href="screens/books.html">📚 Books</a></li>
-                            <li><a class="dropdown-item" href="screens/code_sheets.html">💻 Code Sheets</a></li>
-                            <li><a class="dropdown-item" href="screens/commands.html">⌨ Commands</a></li>
-                            <li><a class="dropdown-item" href="#">💡 Project Ideas</a></li>
-                        </ul>
-                    </li> -->
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-home me-1"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-info-circle me-1"></i> About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact"><i class="fas fa-envelope me-1"></i> Contact</a></li>
                 </ul>
             </div>
-            
         </div>
     </nav>
 
-    <header class="text-center py-5 bg-primary text-white">
-        <h1>Welcome to Tech Project Bazaar</h1>
-        <p>Your one-stop solution for final-year IT & CS projects</p>
+    <header class="text-center py-5 text-white">
+        <div class="container">
+            <h1>Welcome to Tech Project Bazaar</h1>
+            <p>Your one-stop solution for final-year IT & CS projects</p>
+        </div>
     </header>
 
     <div class="container my-5">
-        <div class="row" id="project-list">
+        <!-- Loading Animation -->
+        <div id="loader" class="loader">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        
+        <div class="row" id="project-list" style="display: none;">
             <!-- Dynamic Projects Will Be Loaded Here -->
         </div>
+    </div>
+
+    <!-- Pagination Buttons -->
+    <div class="pagination-container">
+        <button id="prev-btn" class="pagination-btn btn btn-secondary" style="display:none;">
+            <i class="fas fa-arrow-left me-2"></i> Previous
+        </button>
+        <button id="next-btn" class="pagination-btn btn btn-primary">
+            Next <i class="fas fa-arrow-right ms-2"></i>
+        </button>
     </div>
 
     <section id="about" class="container my-5 text-center">
         <div class="heading">
             <h2 class="about_head_underline">About Us</h2>
-            <p style="font-size: 13px;">Welcome to <strong>Tech Project Bazaar</strong>, your one-stop solution for all project development needs! We specialize in building innovative and industry-relevant projects for final-year IT and CS students, ensuring they gain hands-on experience with the latest technologies.</p>
+            <p>Welcome to <strong>Tech Project Bazaar</strong>, your one-stop solution for all project development needs! We specialize in building innovative and industry-relevant projects for final-year IT and CS students, ensuring they gain hands-on experience with the latest technologies.</p>
         </div>
         
         <div class="about-container">
@@ -127,13 +681,14 @@
                 <p>Beyond academics, we empower local businesses by developing customized websites and mobile applications to enhance their digital presence and streamline their operations.</p>
                 <p>At <strong>Tech Project Bazaar</strong>, our goal is to turn ideas into reality while providing expert guidance and high-quality solutions. 🚀</p>
                 
-                <a href="screens/aboutus.html" class="btn btn-primary">Read More</a>
+                <a href="screens/aboutus.html" class="btn btn-primary">
+                    <i class="fas fa-arrow-right me-2"></i> Read More
+                </a>
             </div>
         </div>
     </section>
-    
 
-    <section id="contact" class="container my-5">
+    <section id="contact" class="container">
         <div class="contact-container">
             <div class="contact-info">
                 <h3>Contact Information</h3>
@@ -153,14 +708,18 @@
                     </div>
                     <input type="text" name="subject" placeholder="Your Subject" required>
                     <textarea name="message" placeholder="Write your message" required></textarea>
-                    <button type="submit" class="btn-primary-contact">Send Message</button>
+                    <button type="submit" class="btn-primary-contact">
+                        <i class="fas fa-paper-plane me-2"></i> Send Message
+                    </button>
                 </form>
             </div>
         </div>
     </section>
     
     <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2025 Tech Project Bazaar | All rights reserved by <b>SBM Solutions</b></p>
+        <div class="container">
+            <p>&copy; 2025 Tech Project Bazaar | All rights reserved by <b>SBM Solutions</b></p>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

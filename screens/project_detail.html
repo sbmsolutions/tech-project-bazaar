@@ -3,38 +3,565 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Details</title>
-    <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/tech-project-bazaar/styles/style.css">
+    <title>Project Details - Tech Project Bazaar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        :root {
+            --primary: #3a86ff;
+            --primary-dark: #2667cc;
+            --secondary: #ff5a5f;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --light-gray: #e5e7eb;
+            --accent: #4cc9f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f8f9fa;
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        .header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .header-logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .back-link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+        
+        .back-link i {
+            margin-right: 0.5rem;
+        }
+        
+        /* Main Content */
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        /* Project Container */
+        .project-container {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Project Header */
+        .project-header {
+            position: relative;
+            overflow: hidden;
+            height: 350px;
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-header:hover .project-image {
+            transform: scale(1.05);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            padding: 2rem;
+            color: white;
+        }
+        
+        .project-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .project-type-badge {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        /* Project Content */
+        .project-content {
+            padding: 2rem;
+        }
+        
+        .project-description {
+            font-size: 14px;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            line-height: 1.8;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        /* Project Details */
+        .project-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .detail-card {
+            background-color: var(--light);
+            padding: 1.2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+            display: block;
+            font-size: 14px;
+        }
+        
+        .detail-value {
+            font-size: 14px;
+            color: var(--dark);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .badge-success {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+        
+        .badge-warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+        
+        .badge-danger {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+        
+        .badge-primary {
+            background-color: rgba(58, 134, 255, 0.1);
+            color: var(--primary);
+        }
+        
+        /* Tags */
+        .tags-container {
+            margin-top: 1rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            margin: 0 0.5rem 0.5rem 0;
+            font-size: 0.85rem;
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Project Buttons */
+        .back-button {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            background-color: #6b7280;
+            padding: 6px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        /* .back-button:hover {
+            background: transparent;
+        } */
+
+        .project-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-width: 160px;
+        }
+        
+        .btn i {
+            margin-right: 0.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px rgba(58, 134, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(58, 134, 255, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--dark);
+            border: 1px solid var(--light-gray);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-accent {
+            background-color: var(--secondary);
+            color: white;
+            box-shadow: 0 4px 6px rgba(255, 90, 95, 0.3);
+        }
+        
+        .btn-accent:hover {
+            background-color: #e01e37;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(255, 90, 95, 0.4);
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(58, 134, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer p {
+            margin: 0;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-header {
+                height: 250px;
+            }
+            
+            .project-title {
+                font-size: 16px;
+            }
+            
+            .project-details-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="project-container">
-        <h1 id="project-title" class="project-title">Loading...</h1>
-        <img id="project-image" class="project-image" src="" alt="Project Image">
-        <p id="project-description" class="project-details">Fetching details...</p>
-        
-        <div id="project-details" class="project-details-container">
-            <p id="project-Language" class="project-details-item"></p>
-            <p id="project-ProjectType" class="project-details-item"></p>
-            <p id="project-DatabaseCategory" class="project-details-item"></p>
-            <p id="project-DatabaseType" class="project-details-item"></p>
-            <p id="project-SourceCodeAvailable" class="project-details-item"></p>
-            <p id="project-ProjectReportAvailable" class="project-details-item"></p>
-            <p id="project-ProjectActivityDocument" class="project-details-item"></p>
-            <p id="project-ProjectReportDocument" class="project-details-item"></p>
-            <p id="project-ProjectAvailable" class="project-details-item"></p>
-            <p id="project-SynopsisAvailable" class="project-details-item"></p>
-            <p id="project-SynopsisDocument" class="project-details-item"></p>
-            <p id="project-ProjectTags" class="project-details-item"></p>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="/tech-project-bazaar/index.html" class="header-logo">
+                Tech Project Bazaar
+            </a>
+            <button id="backButton" class="back-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"></path>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back
+            </button>
         </div>
-        
-        <div class="project-buttons">
-            <a href="#" id="youtube-link" class="btn btn-primary" target="_blank">Watch Demo</a>
-            <a href="/tech-project-bazaar/index.html" class="btn btn-secondary">Back to Projects</a>
+    </header>
+
+    <div class="main-container">
+        <div class="project-container">
+            <!-- Project Header with Image and Title -->
+            <div class="project-header">
+                <img id="project-image" class="project-image" src="" alt="Project Image">
+                <div class="project-overlay">
+                    <div id="project-type-badge" class="project-type-badge">Loading...</div>
+                    <h1 id="project-title" class="project-title">Loading...</h1>
+                </div>
+            </div>
+            
+            <!-- Project Content -->
+            <div class="project-content">
+                <!-- Project Description -->
+                <div id="loading-indicator" class="loading">
+                    <div class="spinner"></div>
+                </div>
+                
+                <div id="project-content-container" style="display: none;">
+                    <p id="project-description" class="project-description">Fetching details...</p>
+                    
+                    <!-- Project Details Section -->
+                    <h2 class="section-title">Project Details</h2>
+                    <div class="project-details-grid">
+                        <div class="detail-card">
+                            <span class="detail-label">Language</span>
+                            <div id="project-Language" class="detail-value">Loading...</div>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <span class="detail-label">Project Type</span>
+                            <div id="project-ProjectType" class="detail-value">Loading...</div>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <span class="detail-label">Database Category</span>
+                            <div id="project-DatabaseCategory" class="detail-value">Loading...</div>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <span class="detail-label">Database Type</span>
+                            <div id="project-DatabaseType" class="detail-value">Loading...</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Availability Section -->
+                    <h2 class="section-title">Project Availability</h2>
+                    <div class="project-details-grid">
+                        <div class="detail-card">
+                            <span class="detail-label">Source Code</span>
+                            <div id="project-SourceCodeAvailable" class="detail-value">Loading...</div>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <span class="detail-label">Project Report</span>
+                            <div id="project-ProjectReportAvailable" class="detail-value">Loading...</div>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <span class="detail-label">Project</span>
+                            <div id="project-ProjectAvailable" class="detail-value">Loading...</div>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <span class="detail-label">Synopsis</span>
+                            <div id="project-SynopsisAvailable" class="detail-value">Loading...</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Documents Section -->
+                    <h2 class="section-title">Documents</h2>
+                    <div class="project-details-grid">
+                        <div class="detail-card">
+                            <span class="detail-label">Activity Document</span>
+                            <div id="project-ProjectActivityDocument" class="detail-value">Loading...</div>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <span class="detail-label">Report Document</span>
+                            <div id="project-ProjectReportDocument" class="detail-value">Loading...</div>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <span class="detail-label">Synopsis Document</span>
+                            <div id="project-SynopsisDocument" class="detail-value">Loading...</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tags Section -->
+                    <h2 class="section-title">Project Tags</h2>
+                    <div id="project-tags-container" class="tags-container">
+                        <!-- Tags will be dynamically inserted here -->
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="project-buttons">
+                        <a href="#" id="youtube-link" class="btn btn-primary">
+                            <i class="fab fa-youtube"></i> Watch Demo
+                        </a>
+                        <!-- <a href="/tech-project-bazaar/index.html" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to Projects
+                        </a> -->
+                        <button id="backButton" class="back-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 12H5"></path>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                            Back
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2025 Tech Project Bazaar | All rights reserved by <strong>SBM Solutions</strong></p>
+        </div>
+    </footer>
 
     <script type="module">
+        document.getElementById("backButton").addEventListener("click", function () {
+            window.history.back(); // Navigates to the previous page
+        });
+
         // Get project ID from URL
         const urlParams = new URLSearchParams(window.location.search);
         const projectId = urlParams.get('id');
@@ -62,29 +589,94 @@
                 return;
             }
 
-            const docRef = doc(db, "Projects", projectId);
-            const docSnap = await getDoc(docRef);
+            try {
+                const docRef = doc(db, "Projects", projectId);
+                const docSnap = await getDoc(docRef);
 
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                document.getElementById("project-title").textContent = data.ProjectName;
-                document.getElementById("project-description").textContent = data.ProjectDescription;
-                document.getElementById("project-DatabaseCategory").innerHTML = "<strong>Database Category: </strong>"+data.DatabaseCategory;
-                document.getElementById("project-DatabaseType").innerHTML = "<strong>Database Type: </strong>"+data.DatabaseType;
-                document.getElementById("project-Language").innerHTML = "<strong>Language: </strong>"+data.Language;
-                document.getElementById("project-ProjectActivityDocument").innerHTML = "<strong>Project Activity Document Available: </strong>"+data.ProjectActivityDocument;
-                document.getElementById("project-ProjectAvailable").innerHTML = "<strong>Project Available: </strong>"+data.ProjectAvailable;
-                document.getElementById("project-ProjectReportAvailable").innerHTML = "<strong>Project Report Available: </strong>"+data.ProjectReportAvailable;
-                document.getElementById("project-ProjectReportDocument").innerHTML = "<strong>Project Report Document: </strong>"+data.ProjectReportDocument;
-                document.getElementById("project-ProjectTags").innerHTML = "<strong>Project Tags: </strong>"+data.ProjectTags;
-                document.getElementById("project-ProjectType").innerHTML = "<strong>Project Type: </strong>"+data.ProjectType;
-                document.getElementById("project-SourceCodeAvailable").innerHTML = "<strong>Source Code Available: </strong>"+data.SourceCodeAvailable;
-                document.getElementById("project-SynopsisAvailable").innerHTML = "<strong>Synopsis Available: </strong>"+data.SynopsisAvailable;
-                document.getElementById("project-SynopsisDocument").innerHTML = "<strong>Synopsis Document: </strong>"+data.SynopsisDocument;
-                document.getElementById("project-image").src = data.ProjectImage;
-                document.getElementById("youtube-link").href = data.ProjectDemoLink || "#";
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    
+                    // Update project title and badge
+                    document.getElementById("project-title").textContent = data.ProjectName;
+                    document.getElementById("project-type-badge").textContent = data.ProjectType || "Project";
+                    
+                    // Update project description
+                    document.getElementById("project-description").textContent = data.ProjectDescription;
+                    
+                    // Update project details
+                    document.getElementById("project-Language").textContent = data.Language || "Not specified";
+                    document.getElementById("project-ProjectType").textContent = data.ProjectType || "Not specified";
+                    document.getElementById("project-DatabaseCategory").textContent = data.DatabaseCategory || "Not specified";
+                    document.getElementById("project-DatabaseType").textContent = data.DatabaseType || "Not specified";
+                    
+                    // Update availability details with badges
+                    document.getElementById("project-SourceCodeAvailable").innerHTML = getBadgeHTML(data.SourceCodeAvailable);
+                    document.getElementById("project-ProjectReportAvailable").innerHTML = getBadgeHTML(data.ProjectReportAvailable);
+                    document.getElementById("project-ProjectAvailable").innerHTML = getBadgeHTML(data.ProjectAvailable);
+                    document.getElementById("project-SynopsisAvailable").innerHTML = getBadgeHTML(data.SynopsisAvailable);
+                    
+                    // Update document details
+                    document.getElementById("project-ProjectActivityDocument").textContent = data.ProjectActivityDocument || "Not available";
+                    document.getElementById("project-ProjectReportDocument").textContent = data.ProjectReportDocument || "Not available";
+                    document.getElementById("project-SynopsisDocument").textContent = data.SynopsisDocument || "Not available";
+                    
+                    // Update project image
+                    document.getElementById("project-image").src = data.ProjectImage;
+                    
+                    // Update YouTube link
+                    document.getElementById("youtube-link").href = data.ProjectDemoLink || "#";
+                    
+                    // Create tags if available
+                    if (data.ProjectTags) {
+                        const tagsContainer = document.getElementById("project-tags-container");
+                        const tags = data.ProjectTags.split(',').map(tag => tag.trim());
+                        
+                        tags.forEach(tag => {
+                            if (tag) {
+                                const tagElement = document.createElement("span");
+                                tagElement.className = "tag";
+                                tagElement.textContent = tag;
+                                tagsContainer.appendChild(tagElement);
+                            }
+                        });
+                    }
+                    
+                    // Hide loading indicator and show content
+                    document.getElementById("loading-indicator").style.display = "none";
+                    document.getElementById("project-content-container").style.display = "block";
+                    
+                } else {
+                    console.error("No such project found!");
+                    document.getElementById("project-title").textContent = "Project Not Found";
+                    document.getElementById("project-description").textContent = "The requested project could not be found.";
+                    
+                    // Hide loading indicator and show content
+                    document.getElementById("loading-indicator").style.display = "none";
+                    document.getElementById("project-content-container").style.display = "block";
+                }
+            } catch (error) {
+                console.error("Error fetching project:", error);
+                document.getElementById("project-title").textContent = "Error Loading Project";
+                document.getElementById("project-description").textContent = "There was an error loading the project details. Please try again later.";
+                
+                // Hide loading indicator and show content
+                document.getElementById("loading-indicator").style.display = "none";
+                document.getElementById("project-content-container").style.display = "block";
+            }
+        }
+        
+        // Helper function to create badge HTML based on availability
+        function getBadgeHTML(value) {
+            if (!value) return '<span class="badge badge-danger">Not Available</span>';
+            
+            if (value.toLowerCase() === 'yes' || value === true || value === 'true') {
+                return '<span class="badge badge-success">Available</span>';
+            } else if (value.toLowerCase() === 'no' || value === false || value === 'false') {
+                return '<span class="badge badge-danger">Not Available</span>';
+            } else if (value.toLowerCase().includes('coming') || value.toLowerCase().includes('soon')) {
+                return '<span class="badge badge-warning">Coming Soon</span>';
             } else {
-                console.error("No such project found!");
+                return value;
             }
         }
 

@@ -4,146 +4,581 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Tech Project Bazaar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --secondary: #f72585;
+            --accent: #4cc9f0;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #10b981;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+        }
+        
+        .page-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Header Styling */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 30px 0;
+            position: relative;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+        
+        .logo a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to bottom, rgba(67, 97, 238, 0.05), rgba(76, 201, 240, 0.05));
+            padding: 80px 0;
             text-align: center;
         }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        .about_head_underline {
-            font-size: 36px;
-            font-weight: bold;
+        
+        .section-title {
             position: relative;
             display: inline-block;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-dark);
         }
-        .about_head_underline::after {
+        
+        .section-title::after {
             content: '';
             position: absolute;
-            width: 100%;
+            width: 80px;
             height: 4px;
-            background: linear-gradient(90deg, #ff0000, #ff7300, #ff00ff);
+            background: linear-gradient(90deg, var(--primary), var(--accent));
             bottom: -10px;
-            left: 0;
-            box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
-            animation: glow 1.5s infinite alternate;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
-        @keyframes glow {
-            0% { box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8); }
-            100% { box-shadow: 0px 0px 20px rgba(255, 255, 0, 0.8); }
-        }
+        
+        /* About Section */
         .about-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 8px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            padding: 50px 20px;
+            gap: 40px;
         }
-        .about-image {
+        
+        .about-image-container {
             flex: 1;
-            text-align: center;
+            min-width: 300px;
+            position: relative;
         }
-        .about-image img {
-            width: 80%;
+        
+        .about-image {
+            width: 100%;
             border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
+            box-shadow: var(--shadow);
+            transition: all 0.5s ease;
+            filter: contrast(1.1);
         }
-        .about-image img:hover {
-            transform: scale(1.05);
+        
+        .image-shape {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            z-index: -1;
+            opacity: 0.3;
+            animation: morph 8s ease-in-out infinite;
         }
+        
+        .shape-1 {
+            top: -30px;
+            left: -30px;
+        }
+        
+        .shape-2 {
+            bottom: -30px;
+            right: -30px;
+            animation-delay: 2s;
+        }
+        
+        @keyframes morph {
+            0% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            }
+            25% {
+                border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+            }
+            50% {
+                border-radius: 30% 70% 70% 30% / 70% 30% 70% 30%;
+            }
+            75% {
+                border-radius: 70% 30% 30% 70% / 30% 70% 30% 70%;
+            }
+            100% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            }
+        }
+        
         .about-content {
             flex: 1;
-            padding: 20px;
-            text-align: justify;
+            min-width: 300px;
         }
-        .about-content p {
-            font-size: 16px;
-            color: #333;
-            line-height: 1.6;
-        }
-        .btn {
-            display: inline-block;
-            background: #007bff;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
+        
+        .about-content h3 {
             font-size: 18px;
-            border-radius: 5px;
-            transition: 0.3s;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
         }
-        .btn:hover {
-            background: #0056b3;
+        
+        .about-content p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.8;
         }
-        .social-icons {
-            margin-top: 20px;
+        
+        .about-content p strong {
+            color: var(--primary);
+            font-weight: 600;
         }
-        .social-icons a {
-            color: #007bff;
+        
+        .highlight-box {
+            background: white;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        /* Team Section */
+        .team-section {
+            background: linear-gradient(to bottom, var(--light), white);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .team-title {
             font-size: 24px;
-            margin: 0 10px;
-            transition: 0.3s;
+            margin-bottom: 50px;
+            color: var(--primary-dark);
+            position: relative;
+            display: inline-block;
         }
-        .social-icons a:hover {
-            color: #0056b3;
+        
+        .team-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
-        .team {
-            margin-top: 50px;
+        
+        .team-members {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
         }
-        .team img {
-            width: 100px;
+        
+        .team-member {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            max-width: 250px;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-member img {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            margin: 10px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid rgba(67, 97, 238, 0.1);
+            transition: all 0.3s ease;
         }
+        
+        .team-member:hover img {
+            border-color: var(--primary);
+        }
+        
+        .team-member h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--primary-dark);
+        }
+        
+        .team-member p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: white;
+            padding: 16px 0;
+            text-align: center;
+        }
+        
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .contact-title {
+            font-size: 24px;
+            margin-bottom: 40px;
+            color: var(--primary-dark);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .contact-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .contact-card {
+            background: linear-gradient(to bottom right, var(--light), white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+        }
+        
+        .contact-info p {
+            margin: 15px 0;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        .contact-info i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .social-icons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            color: var(--primary);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        footer p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        footer a:hover {
+            color: white;
+        }
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
+            .section-title, .team-title, .contact-title {
+                font-size: 24px;
+            }
+            
             .about-section {
                 flex-direction: column;
-                text-align: center;
+                padding: 16px 20px;
             }
-            .about-content {
-                text-align: center;
+            
+            .about-image-container {
+                margin-bottom: 30px;
+            }
+            
+            .about-content h3 {
+                font-size: 16px;
+            }
+            
+            .team-members {
+                gap: 20px;
             }
         }
+        
+        @media (max-width: 480px) {
+            .section-title, .team-title, .contact-title {
+                font-size: 20px;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .team-member {
+                padding: 20px;
+            }
+            
+            .contact-card {
+                padding: 30px 20px;
+            }
+        }
+
+        .back-button {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            background-color: #1a5f7a;
+            padding: 6px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2 class="about_head_underline">About Us</h2>
-        <div class="about-section">
-            <div class="about-image">
-                <img src="/tech-project-bazaar/assets/images/about-image.jpg" alt="About Us">
-                <!-- <img src="/assets/images/about-image.jpg" alt="About Us"> -->
+    <div class="page-wrapper">
+        <!-- Header Section -->
+        <header>
+            <div class="header-container">
+                <h1 class="logo"><a href="/tech-project-bazaar/index.html">Tech Project Bazaar</a></h1>
+                <button id="backButton" class="back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5"></path>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back
+                </button>
             </div>
+        </header>
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <h2 class="section-title">About Us</h2>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section class="about-section">
+            <div class="about-image-container">
+                <div class="image-shape shape-1"></div>
+                <img src="/tech-project-bazaar/assets/images/about-image.jpg" alt="About Us" class="about-image">
+                <!-- <img src="/assets/images/about-image.jpg" alt="About Us" class="about-image"> -->
+                <div class="image-shape shape-2"></div>
+            </div>
+            
             <div class="about-content">
-                <p style="font-size: 13px; text-align: justify;">Welcome to <strong>Tech Project Bazaar</strong>, your go-to hub for final-year project development, blackbook documentation, and business digitalization.</p>
-                <p style="font-size: 13px; text-align: justify">We help IT and CS students by providing top-notch project solutions, while also assisting local businesses in building custom websites and mobile applications.</p>
-                <p style="font-size: 13px; text-align: justify">We also provide comprehensive blackbook documentation assistance, helping students present their projects professionally with well-structured reports, UML diagrams, and detailed explanations.</p>
-                <p style="font-size: 13px; text-align: justify">Beyond academics, we empower local businesses by developing customized websites and mobile applications to enhance their digital presence and streamline their operations.</p>
-                <p style="font-size: 13px; text-align: justify">Additionally, we offer one-on-one project explanations, ensuring students and business owners understand every aspect of their project, from implementation to deployment.</p>
-                <p style="font-size: 13px; text-align: justify">At <strong>Tech Project Bazaar</strong>, our goal is to turn ideas into reality while providing expert guidance and high-quality solutions. 🚀</p>
+                <h3>Your Go-To Hub for IT Solutions</h3>
+                <p>Welcome to <strong>Tech Project Bazaar</strong>, your one-stop solution for all project development needs! We specialize in building innovative and industry-relevant projects for final-year IT and CS students, ensuring they gain hands-on experience with the latest technologies.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Our mission:</strong> To empower students and businesses through technology, turning innovative ideas into reality with expert guidance and high-quality solutions.</p>
+                </div>
+                
+                <p>We provide comprehensive blackbook documentation assistance, helping students present their projects professionally with well-structured reports, UML diagrams, and detailed explanations.</p>
+                
+                <p>Beyond academics, we empower local businesses by developing customized websites and mobile applications to enhance their digital presence and streamline their operations.</p>
+                
+                <p>Additionally, we offer one-on-one project explanations, ensuring students and business owners understand every aspect of their project, from implementation to deployment.</p>
+                
+                <p>At <strong>Tech Project Bazaar</strong>, our goal is to turn ideas into reality while providing expert guidance and high-quality solutions. 🚀</p>
             </div>
-        </div>
-        <!-- <div class="team">
-            <h3>Our Team</h3>
-            <img src="/assets/images/image-palceholder.jpg" alt="Team Member">
-            <img src="/assets/images/image-palceholder.jpg" alt="Team Member">
-        </div> -->
-        <div class="social-icons">
-            <a href="https://www.instagram.com/sbmsolutions95" target="_blank"><i class="fab fa-instagram"></i></a>
-            <!-- <a href="#"><i class="fab fa-linkedin"></i></a> -->
-            <a href="https://wa.me/919359168479" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        </div>
-        <div class="contact-info">
-            <p style="font-size: 13px;">Email: sbmsolutions95@gmail.com</p>
-            <p style="font-size: 13px;">Phone: +91-9359168479</p>
-        </div>
+        </section>
+        
+        <!-- Team Section -->
+        <!-- <section class="team-section">
+            <div class="team-container">
+                <h3 class="team-title">Meet Our Team</h3>
+                <div class="team-members">
+                    <div class="team-member">
+                        <img src="/assets/images/image-palceholder.jpg" alt="Team Member">
+                        <h4>John Doe</h4>
+                        <p>Lead Developer</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="/assets/images/image-palceholder.jpg" alt="Team Member">
+                        <h4>Jane Smith</h4>
+                        <p>Project Manager</p>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+        
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="contact-container">
+                <h3 class="contact-title">Get In Touch</h3>
+                <div class="contact-card">
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> sbmsolutions95@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> +91-9359168479</p>
+                        <p><i class="fas fa-map-marker-alt"></i> India</p>
+                    </div>
+                    
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/sbmsolutions95" target="_blank" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/919359168479" target="_blank" class="social-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:sbmsolutions95@gmail.com" class="social-icon">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <div class="footer-container">
+                <p>&copy; 2025 Tech Project Bazaar | All rights reserved</p>
+                <p>Designed and developed by <a href="#">SBM Solutions</a></p>
+            </div>
+        </footer>
     </div>
+
+    <script type="module">
+        document.getElementById("backButton").addEventListener("click", function () {
+            window.history.back(); // Navigates to the previous page
+        });
+    </script>
 </body>
 </html>
